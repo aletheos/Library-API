@@ -21,7 +21,7 @@ public class SecurityConfig {
 		http
 // Q: Why would I want to disable this?
 // A: Because it can often block POST/PUT/DELETE requests in a REST API
-			.csrf(csrf -> csrf.disable())
+			.csrf(csrf -> csrf.disable()) // equivalent to AbstractHttpConfigurer::disable
 			.authorizeHttpRequests(
 				(authorize) -> {
 					authorize
