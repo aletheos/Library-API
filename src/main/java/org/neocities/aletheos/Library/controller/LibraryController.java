@@ -4,11 +4,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping("/api")
 @RestController
-@RequestMapping("/")
 public class LibraryController {
-	@GetMapping
-	public String getMessage() {
+	@GetMapping("/books")
+	public String publicAccess() {
 		return ":3";
+	}
+
+	@GetMapping("/games")
+	public String privateAccess() {
+		return ":3c";
 	}
 }
