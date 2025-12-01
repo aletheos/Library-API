@@ -1,6 +1,7 @@
 package org.neocities.aletheos.Library.service;
 
 import org.neocities.aletheos.Library.entity.AppUser;
+import org.neocities.aletheos.Library.entity.CustomUserDetails;
 import org.neocities.aletheos.Library.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,13 +23,6 @@ public class CustomUserDetailService implements UserDetailsService {
 		AppUser user = userRepository.findByUsername(username)
 			.orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
-		return new User(
-			user.getUsername(),
-			user.getPassword(),
-			user.getRoles()
-				.stream()
-				.map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-				.toList()
-		);
+		return new CustomUserDetails(user);
 	}
 }
