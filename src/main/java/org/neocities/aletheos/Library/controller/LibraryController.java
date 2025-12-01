@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class LibraryController {
-	@GetMapping("/books")
+	@GetMapping("/public")
 	public String publicAccess() {
 		return "Hello " + SecurityContextHolder.getContext().getAuthentication().getName() + " :3";
 	}
 
-	@GetMapping("/games")
+	@GetMapping("/private")
 	public String privateAccess() {
 		return "Greetings " + SecurityContextHolder.getContext().getAuthentication().getName() + " :3c";
 	}

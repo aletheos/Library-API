@@ -1,33 +1,33 @@
 package org.neocities.aletheos.Library.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
-	@Autowired
-	private JwtFilter jwtFilter;
+	private final JwtFilter jwtFilter;
+
+	public SecurityConfig(JwtFilter jwtFilter) {
+		this.jwtFilter = jwtFilter;
+	}
 
 	@Bean
-	public SecurityFilterChain publicAccessChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain apiSecurityChain(HttpSecurity http) throws Exception {
 		http
 			.csrf(AbstractHttpConfigurer::disable)
-			.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.sessionManagement(mgmnt -> mgmnt.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.authorizeHttpRequests(
-				(authorize) -> {
-					authorize
+				(auth) -> {
+					auth
 						.requestMatchers("/login").permitAll()
-						.requestMatchers("/api/books").hasRole("USER")
-						.requestMatchers("/api/games").hasAnyRole("USER", "MODERATOR", "ADMINISTRATOR")
+						.requestMatchers("/api/public").permitAll()
+						.requestMatchers("/api/private").hasAnyRole("USER", "MODERATOR", "ADMINISTRATOR")
+						.anyRequest().authenticated()
 					;
 				}
 			)

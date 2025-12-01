@@ -3,18 +3,16 @@ package org.neocities.aletheos.Library.service;
 import org.neocities.aletheos.Library.entity.AppUser;
 import org.neocities.aletheos.Library.entity.CustomUserDetails;
 import org.neocities.aletheos.Library.repository.UserRepository;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserDetailService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 	private final UserRepository userRepository;
 
-	public CustomUserDetailService(UserRepository userRepository) {
+	public CustomUserDetailsService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
