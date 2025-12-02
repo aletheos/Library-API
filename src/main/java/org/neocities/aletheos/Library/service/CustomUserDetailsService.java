@@ -1,6 +1,6 @@
 package org.neocities.aletheos.Library.service;
 
-import org.neocities.aletheos.Library.entity.AppUser;
+import org.neocities.aletheos.Library.entity.User;
 import org.neocities.aletheos.Library.entity.CustomUserDetails;
 import org.neocities.aletheos.Library.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		AppUser user = userRepository.findByUsername(username)
+		User user = userRepository.findByUsername(username)
 			.orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
 		return new CustomUserDetails(user);

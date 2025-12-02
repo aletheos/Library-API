@@ -6,10 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+// This whole thing seems to be nothing more than a wrapper around User... why is it here in the model?
 public class CustomUserDetails implements UserDetails {
-	private final AppUser user;
+	private final User user;
 
-	public CustomUserDetails(AppUser user) {
+	public CustomUserDetails(User user) {
 		this.user = user;
 	}
 

@@ -1,7 +1,7 @@
 package org.neocities.aletheos.Library.controller;
 
 import org.neocities.aletheos.Library.config.JwtUtil;
-import org.neocities.aletheos.Library.entity.AppUser;
+import org.neocities.aletheos.Library.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -24,7 +24,7 @@ public class AuthController {
 	}
 
 	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<?> login(@RequestBody AppUser user) {
+	public ResponseEntity<?> login(@RequestBody User user) {
 		try {
 			Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
